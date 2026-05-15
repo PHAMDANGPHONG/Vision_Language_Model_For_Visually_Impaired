@@ -1,0 +1,40 @@
+# =========================================================
+#  Vietnamese natural-language templates for Layer 3 output composer
+#  Templates use Python str.format() syntax.
+# =========================================================
+
+hazard_alert:
+  - "Cảnh báo: có {hazard} ở {position}."
+  - "Chú ý {hazard} {position}."
+  - "Cẩn thận {hazard} {position}."
+
+object_location:
+  - "{object} ở {position}, khoảng cách {distance}."
+  - "Có {object} {position}."
+  - "{object} nằm {position} của bạn."
+
+answer_intro:
+  - "Trả lời:"
+  - ""
+
+unclear_image:
+  blurry: "Ảnh bị mờ, vui lòng giữ máy ổn định và chụp lại."
+  dark: "Cảnh quá tối, hãy hướng về phía sáng hơn."
+  occluded: "Vật thể bị khuất {hint}, vui lòng nghiêng camera nhẹ {hint}."
+  low_confidence: "Tôi không chắc chắn, vui lòng thử lại với góc khác."
+
+position_translation:
+  left: "bên trái"
+  right: "bên phải"
+  center: "ngay trước mặt"
+  front: "trước mặt bạn"
+  behind: "phía sau bạn"
+  above: "phía trên"
+  below: "phía dưới"
+
+distance_translation:
+  near: "gần"
+  mid: "vừa tầm"
+  far: "ở xa"
+
+no_objects: "Tôi không thấy vật thể đáng chú ý nào."

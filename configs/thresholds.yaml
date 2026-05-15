@@ -1,0 +1,83 @@
+# =========================================================
+#  Tunable thresholds — all values calibrated experimentally in Week 5-8.
+#  Document each change in eval/logs/threshold_calibration.md
+# =========================================================
+
+layer1_input_filter:
+  blur:
+    # Variance of Laplacian threshold; below ⇒ frame considered blurry.
+    # Typical good range: 80–150 for 640×480 indoor images.
+    laplacian_var_min: 100.0
+
+  exposure:
+    # Mean luminance band [min, max] of grayscale histogram.
+    luminance_min: 40
+    luminance_max: 220
+    # Reject if >X% pixels are saturated black or white.
+    saturation_max_ratio: 0.30
+
+  scene_change:
+    # SSIM between consecutive frames; above ⇒ scene unchanged.
+    ssim_unchanged_min: 0.95
+    # How many frames to keep in history for SSIM comparison
+    history_size: 3
+
+layer2_confidence:
+  # Weights for the 3-signal confidence estimator (see §5.2.2 of README)
+  weight_logprob: 0.4
+  weight_self_consistency: 0.4
+  weight_vague_phrase: 0.2
+
+  # Number of samples for self-consistency check
+  self_consistency_samples: 3
+  self_consistency_temperature: 0.5
+
+  # Final confidence threshold; below ⇒ trigger re-acquisition feedback
+  min_confidence: 0.45
+
+  # Vague phrases that lower confidence (English; extend for VI after translator)
+  vague_phrases_en:
+    - "i'm not sure"
+    - "it might be"
+    - "possibly"
+    - "appears to be"
+    - "could be"
+    - "i think"
+    - "unclear"
+    - "hard to tell"
+  vague_phrases_vi:
+    - "không rõ"
+    - "có thể là"
+    - "có vẻ"
+    - "hình như"
+    - "dường như"
+
+layer3_output:
+  # Priority categories (lower index = higher priority)
+  priority_order:
+    - safety        # vật sắc nhọn, lửa, nước, cầu thang
+    - goal          # trả lời trực tiếp câu hỏi user
+    - context       # mô tả bối cảnh
+  max_sentences: 2
+  max_words_per_sentence: 15
+
+  # Safety keywords (Vietnamese) — used by sanity check
+  safety_keywords_vi:
+    - dao
+    - kéo
+    - lửa
+    - bếp
+    - nước sôi
+    - cầu thang
+    - ổ điện
+    - mảnh vỡ
+    - thuốc
+
+  # Hazardous COCO classes (from YOLOv8n)
+  safety_coco_classes:
+    - knife
+    - scissors
+    - oven
+    - microwave
+    - toaster
+    - fork

@@ -1,0 +1,73 @@
+# =========================================================
+#  Model registry — paths and per-model hyperparameters
+# =========================================================
+
+vlm:
+  # Active VLM backend. Switch via ENV `VLM_BACKEND` or CLI flag.
+  active: moondream2
+
+  moondream2:
+    # Source: https://huggingface.co/vikhyatk/moondream2
+    repo: vikhyatk/moondream2
+    text_model: data/models/moondream2-text-model-f16-q4_k_m.gguf
+    mmproj: data/models/moondream2-mmproj-f16.gguf
+    quantization: Q4_K_M
+    approx_size_mb: 1600
+    language_support: [en]                # English-only ⇒ translator pipeline ON
+    max_new_tokens: 128
+    temperature: 0.4
+    top_p: 0.9
+
+  smolvlm:
+    # https://huggingface.co/HuggingFaceTB/SmolVLM-Instruct
+    repo: HuggingFaceTB/SmolVLM-Instruct
+    text_model: data/models/SmolVLM-Instruct-Q4_K_M.gguf
+    mmproj: data/models/SmolVLM-Instruct-mmproj.gguf
+    quantization: Q4_K_M
+    approx_size_mb: 1400
+    language_support: [en]
+    max_new_tokens: 128
+    temperature: 0.4
+
+  qwen2vl_2b:
+    # https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct
+    repo: Qwen/Qwen2-VL-2B-Instruct
+    text_model: data/models/Qwen2-VL-2B-Instruct-Q4_K_S.gguf
+    mmproj: data/models/Qwen2-VL-2B-Instruct-mmproj.gguf
+    quantization: Q4_K_S
+    approx_size_mb: 1500
+    language_support: [en, vi, zh, multi]
+    max_new_tokens: 128
+    temperature: 0.4
+
+perception:
+  yolo:
+    weights: data/models/yolov8n.pt
+    conf_threshold: 0.35
+    iou_threshold: 0.5
+    img_size: 480
+    # Restrict to COCO classes relevant for indoor accessibility
+    allowed_classes: null     # null = all 80 classes
+
+stt:
+  vosk:
+    model_path: data/models/vosk-model-small-vn-0.4
+    sample_rate: 16000
+
+tts:
+  piper:
+    voice: data/models/vi_VN-vivos-x_low.onnx
+    voice_config: data/models/vi_VN-vivos-x_low.onnx.json
+    sentence_silence: 0.25
+
+translation:
+  # Only used if VLM language_support does not include `output_language`
+  enabled_when_needed: true
+  backend: argos              # argos | nllb
+  argos:
+    from_code: en
+    to_code: vi
+  nllb:
+    model: facebook/nllb-200-distilled-600M
+    src_lang: eng_Latn
+    tgt_lang: vie_Latn

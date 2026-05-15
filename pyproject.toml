@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vision-assistant"
+version = "0.1.0"
+description = "Multi-layer on-device quantized VLM assistant for the visually impaired (Vietnamese)"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Thesis Author" },
+]
+keywords = ["vlm", "accessibility", "vision-language-model", "edge-ai", "vietnamese"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.scripts]
+vision-assistant = "vision_assistant.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+# =========================================================
+#  Ruff (linter + formatter)
+# =========================================================
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "eval", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long — handled by formatter
+    "B008",  # function call in default argument
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]
+"notebooks/*" = ["E402"]
+
+# =========================================================
+#  Black
+# =========================================================
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311"]
+
+# =========================================================
+#  isort
+# =========================================================
+[tool.isort]
+profile = "black"
+line_length = 100
+src_paths = ["src", "eval", "scripts", "tests"]
+
+# =========================================================
+#  Pytest
+# =========================================================
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+]
+markers = [
+    "slow: deselect with '-m \"not slow\"'",
+    "gpu: require GPU",
+    "integration: end-to-end pipeline tests",
+]
+
+# =========================================================
+#  MyPy
+# =========================================================
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true

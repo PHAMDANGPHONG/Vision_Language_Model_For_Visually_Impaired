@@ -1,0 +1,51 @@
+# =========================================================
+#  Vision-Language Assistant — Core runtime dependencies
+#  Target: Python 3.10–3.11 on Windows 10/11, CPU-only (Iris Xe)
+# =========================================================
+
+# ---------- VLM inference ----------
+# llama-cpp-python: GGUF runtime for Moondream / Qwen2-VL.
+# On Windows: nếu cần Vulkan backend cho Iris Xe, build từ source với
+#   CMAKE_ARGS="-DGGML_VULKAN=on" pip install llama-cpp-python --no-binary llama-cpp-python
+llama-cpp-python>=0.2.90
+
+# ---------- Computer vision ----------
+opencv-python>=4.8.0
+numpy>=1.24.0,<2.0.0
+Pillow>=10.0.0
+
+# ---------- Object detection ----------
+ultralytics>=8.2.0
+
+# ---------- Audio I/O ----------
+sounddevice>=0.4.6
+soundfile>=0.12.1
+# PyAudio: cần PortAudio binary trên Windows; nếu fail dùng sounddevice
+# pyaudio>=0.2.13
+
+# ---------- STT / TTS ----------
+vosk>=0.3.45
+piper-tts>=1.2.0
+
+# ---------- Translation (offline) ----------
+# Lựa chọn 1: Argos Translate — nhẹ, offline, model riêng
+argostranslate>=1.9.6
+# Lựa chọn 2 (alternative, comment out 1 cái):
+# transformers>=4.40.0
+# sentencepiece>=0.2.0
+# torch>=2.1.0  # CPU-only build: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# ---------- Config & logging ----------
+pyyaml>=6.0.1
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.0
+rich>=13.7.0
+loguru>=0.7.2
+
+# ---------- System monitoring ----------
+psutil>=5.9.0
+
+# ---------- Utilities ----------
+tqdm>=4.66.0
+click>=8.1.0

@@ -1,0 +1,111 @@
+# =========================================================
+#  Python
+# =========================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# =========================================================
+#  Models & large binaries (must NOT be committed)
+# =========================================================
+*.gguf
+*.bin
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.tflite
+*.h5
+*.ckpt
+data/models/
+data/datasets/
+data/outputs/
+data/cache/
+
+# =========================================================
+#  Audio output / camera recordings
+# =========================================================
+*.wav
+*.mp3
+*.mp4
+*.avi
+!eval/user_study/sample_*.wav
+
+# =========================================================
+#  Datasets we don't redistribute
+# =========================================================
+data/datasets/vizwiz/
+data/datasets/coco*/
+data/datasets/pope/
+data/datasets/vqav2/
+
+# =========================================================
+#  Notebooks
+# =========================================================
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# =========================================================
+#  IDE / OS
+# =========================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================================================
+#  Logs & temporary
+# =========================================================
+*.log
+logs/
+runs/
+tensorboard/
+wandb/
+mlruns/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# =========================================================
+#  Secrets / env
+# =========================================================
+.env
+.env.local
+*.key
+*.pem
+secrets.json
+credentials.json

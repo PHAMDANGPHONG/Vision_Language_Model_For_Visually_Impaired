@@ -1,0 +1,40 @@
+# =========================================================
+#  Default runtime configuration
+#  Merge order: default.yaml < models.yaml < thresholds.yaml < ENV vars
+# =========================================================
+
+app:
+  name: vision-assistant
+  version: 0.1.0
+  language: vi
+  # Output language; if VLM only speaks English, translator module activates
+  output_language: vi
+  log_level: INFO
+  log_dir: logs
+
+camera:
+  index: 0
+  width: 640
+  height: 480
+  fps: 15
+  # Down-scale before sending to VLM to save inference time
+  vlm_input_size: 384
+
+pipeline:
+  # Max time (seconds) Layer 1 polls camera before forcing a frame
+  poll_timeout_s: 2.0
+  # Skip VLM inference if scene is unchanged AND no new query
+  skip_on_static_scene: true
+  # Cache last description for this many seconds
+  cache_ttl_s: 8.0
+  # If True, stream TTS sentence-by-sentence (lower perceived latency)
+  streaming_tts: true
+
+hardware:
+  # Constrained mode: laptop 8GB RAM single channel, CPU-only (Iris Xe)
+  device: cpu
+  n_threads: 6      # Match physical cores typically
+  n_ctx: 2048
+  n_batch: 256
+  # Memory guard: warn if peak RSS exceeds this (MB)
+  rss_warn_mb: 6500
